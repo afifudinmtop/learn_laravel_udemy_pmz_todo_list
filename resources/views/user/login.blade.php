@@ -13,13 +13,33 @@
 
 <div class="container col-xl-10 col-xxl-8 px-4 py-5">
 
-    {{-- notif --}}
-    @if (isset($error))
+    {{-- notif validator form--}}
+    @if ($errors->any())
         <div class="row">
-            <div class="alert alert-danger" role="alert">
-                {{$error}}
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger" role="alert">
+                    {{$error}}
+                </div>
+            @endforeach
+        </div>
+    @endif
+
+    {{-- notif success--}}
+    @if (session()->has("success"))
+        <div class="row">
+            <div class="alert alert-success" role="alert">
+                {{ session("success") }}
             </div>
         </div>
+    @endif
+
+    {{-- notif error--}}
+    @if (session()->has("error"))
+    <div class="row">
+        <div class="alert alert-danger" role="alert">
+            {{ session("error") }}
+        </div>
+    </div>
     @endif
     
     <div class="row align-items-center g-lg-5 py-5">
@@ -34,8 +54,8 @@
             <form class="p-4 p-md-5 border rounded-3 bg-light" method="post" action="/login">
                 @csrf
                 <div class="form-floating mb-3">
-                    <input name="user" type="text" class="form-control" id="user" placeholder="id">
-                    <label for="user">User</label>
+                    <input name="username" type="text" class="form-control" id="username" placeholder="username">
+                    <label for="username">username</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input name="password" type="password" class="form-control" id="password" placeholder="password">
