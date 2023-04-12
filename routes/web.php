@@ -16,7 +16,7 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('onlyMember');
 
 Route::get('/template', function () {
     return view('template');
@@ -25,5 +25,6 @@ Route::get('/template', function () {
 // user controller
 Route::get('/login', [UserController::class, 'login'])->middleware('onlyGuest');
 Route::post('/login', [UserController::class, 'doLogin']);
-Route::get('/logout', [UserController::class, 'doLogout']);
+
+Route::get('/logout', [UserController::class, 'doLogout'])->middleware('onlyMember');
 Route::post('/logout', [UserController::class, 'doLogout']);
