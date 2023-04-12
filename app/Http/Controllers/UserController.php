@@ -33,9 +33,16 @@ class UserController extends Controller
                         ->where('password', '=', $password)
                         ->count();
 
+        // user_id on database
+        $user_id = DB::table('user')
+                        ->where('username', '=', $username)
+                        ->limit(1)
+                        ->get();
+
         // store data di session
         if ($cek) {
             $request->session()->put('username', $username);
+            $request->session()->put('user_id', $user_id[0]->id);
             return redirect('/');
         }
         
