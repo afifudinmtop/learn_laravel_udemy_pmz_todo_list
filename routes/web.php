@@ -23,6 +23,7 @@ Route::get('/template', function () {
 });
 
 // user controller
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login'])->middleware('onlyGuest');
 Route::post('/login', [UserController::class, 'doLogin']);
+Route::get('/logout', [UserController::class, 'doLogout']);
 Route::post('/logout', [UserController::class, 'doLogout']);

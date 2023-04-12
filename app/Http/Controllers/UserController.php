@@ -43,9 +43,9 @@ class UserController extends Controller
         return back()->with('error', 'invalid username / password!');
     }
 
-    public function doLogout()
+    public function doLogout(Request $request)
     {
         $request->session()->flush();
-        return redirect('/');
+        return redirect('/login');
     }
 }
